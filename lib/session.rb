@@ -9,7 +9,7 @@ class Session
     if cookies["_rails_lite_app"]
       @session = JSON.parse(cookies["_rails_lite_app"])
     else
-      @session = { }
+      @session = {}
     end
   end
 
@@ -21,8 +21,6 @@ class Session
     @session[key] = val
   end
 
-  # serialize the hash into json and save in a cookie
-  # add to the responses cookies
   def store_session(res)
     attributes = { value: JSON.generate(@session), path: "/" }
     res.set_cookie("_rails_lite_app", attributes)

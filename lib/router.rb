@@ -8,13 +8,10 @@ class Route
     @controller_class, @action_name = controller_class, action_name
   end
 
-  # checks if pattern matches path and method matches request method
   def matches?(req)
     (req.request_method.downcase.to_sym == @http_method) && (@pattern =~ req.path)
   end
 
-  # use pattern to pull out route params (save for later?)
-  # instantiate controller and call controller action
   def run(req, res)
     controller = controller_class.new(req, res, {})
     controller.invoke_action(action_name)
